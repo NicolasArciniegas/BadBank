@@ -143,9 +143,9 @@ export function App() {
   return (
     <>
       <div>
-        <NavBar />
         <AllAccountsContext.Provider value={[cuentas, dispatchAccounts]}>
           <LoggedUserContext.Provider value={[user, setUser]}>
+            <NavBar />
             <Outlet />
           </LoggedUserContext.Provider>
         </AllAccountsContext.Provider>

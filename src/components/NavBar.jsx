@@ -12,7 +12,22 @@ export function NavBar() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/register">Create Account</Nav.Link>
+              <Nav.Link>
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to="/allData"
+                >
+                  All data
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to="/register"
+                >
+                  Create Account
+                </Link>
+              </Nav.Link>
               <NavDropdown title="Acciones" id="basic-nav-dropdown">
                 <NavDropdown.Item>
                   <Link to="/retirar">Retirar</Link>

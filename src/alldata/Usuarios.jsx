@@ -9,7 +9,6 @@ import {
   TableBody,
   Typography,
 } from "@mui/material";
-import { moneyFormatter } from "../tools/moneyFormatter";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -36,18 +35,19 @@ function Renglon({ item }) {
   return (
     <StyledTableRow>
       <StyledTableCell component="th" scope="row">
-        {item.fecha}
+        {item.numCuenta}
       </StyledTableCell>
-      <StyledTableCell align="right">{item.bolsillo}</StyledTableCell>
-      <StyledTableCell align="right">{item.movimiento}</StyledTableCell>
+      <StyledTableCell align="right">{item.email}</StyledTableCell>
       <StyledTableCell align="right">
-        {moneyFormatter(item.valor.toString())}
+        {item.nombre + " " + item.apellido}
       </StyledTableCell>
+      <StyledTableCell align="right">{item.balance}</StyledTableCell>
+      <StyledTableCell align="right">{item.movimientos.length}</StyledTableCell>
     </StyledTableRow>
   );
 }
 
-export function Movimientos({ cuenta, mensaje, tipoMov }) {
+export function Usuarios({ cuentas, mensaje }) {
   return (
     <>
       <Typography variant="h5" color="secondary">
@@ -57,30 +57,28 @@ export function Movimientos({ cuenta, mensaje, tipoMov }) {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Fecha</StyledTableCell>
-              <StyledTableCell align="right">Bolsillo</StyledTableCell>
-              <StyledTableCell align="right">Movimiento</StyledTableCell>
-              <StyledTableCell align="right">Valor</StyledTableCell>
+              <StyledTableCell>No. account</StyledTableCell>
+              <StyledTableCell align="right">Email</StyledTableCell>
+              <StyledTableCell align="right">Nombre</StyledTableCell>
+              <StyledTableCell align="right">Balance</StyledTableCell>
+              <StyledTableCell align="right">Num. movimientos</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {cuenta.movimientos.filter((item) => item.movimiento === tipoMov)
-              .length > 0
-              ? cuenta.movimientos
-                  .filter((item) => item.movimiento === tipoMov)
-                  .map((item, index) =>
-                    React.createElement(Renglon, {
-                      key: `renglonMov${index}`,
-                      item,
-                    })
-                  )
+            {cuentas.length > 0
+              ? cuentas.map((cuenta, index) =>
+                  React.createElement(Renglon, {
+                    key: `cuentaRenglon${index}`,
+                    item: cuenta,
+                  })
+                )
               : React.createElement(
                   StyledTableRow,
                   {},
                   React.createElement(
                     StyledTableCell,
-                    { colSpan: 4, style: { textAlign: "center" } },
-                    "Sin movimientos que mostrar"
+                    { style: { textAlign: "center" }, colSpan: 5 },
+                    "Sin usuarios que mostrar"
                   )
                 )}
           </TableBody>

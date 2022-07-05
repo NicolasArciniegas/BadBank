@@ -1,4 +1,5 @@
 import React from "react";
+import { moneyFormatter } from "../tools/moneyFormatter";
 import { Typography, Box } from "@mui/material";
 
 export function Balance({ cuenta }) {
@@ -13,7 +14,7 @@ export function Balance({ cuenta }) {
         <Typography variant="body">Tu balance es de:</Typography>
         <Typography variant="body" fontSize="2vw">
           {" "}
-          ${cuenta.balance}
+          {moneyFormatter(cuenta.balance.toString())}
         </Typography>
       </div>
     </Box>

@@ -14,6 +14,7 @@ import { Abonar } from "./operations/abonar/Abonar";
 import { AccountCreated } from "./register/AccountCreated";
 import { Retirar } from "./operations/retirar/Retirar";
 import { CrearBolsillo } from "./operations/crearbolsillo/CrearBolsillo";
+import { AllData } from "./alldata/AllData";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,6 +26,7 @@ root.render(
         <Route path="/register/accountCreated" element={<AccountCreated />} />
         <Route path="/abonar" element={<Abonar />} />
         <Route path="/retirar" element={<Retirar />} />
+        <Route path="/allData" element={<AllData />} />
         <Route path="/crearBolsillo" element={<CrearBolsillo />} />
       </Route>
     </Routes>
