@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Formulario } from "../comun/Formulario";
-import { AccountContext } from "../../AccountContext";
+import { LoggedUserContext } from "../../LoggedUserContext";
 import { Movimientos } from "../../display/Movimientos";
 import { Balance } from "../../display/Balance";
 
 export function Abonar() {
-  const [cuenta, setCuenta] = useContext(AccountContext);
+  const [cuenta, setCuenta] = useContext(LoggedUserContext);
 
   return (
     <div style={{ display: "flex", marginTop: "2vw" }}>

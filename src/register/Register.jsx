@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import { useOutletContext } from "react-router-dom";
 import { Formulario } from "./Formulario";
 import { CardPublicidad } from "./CardPublicidad";
-import { AccountContext } from "../AccountContext";
+import { AllAccountsContext } from "../AllAccountsContext";
 
 const STYLE = {
   justiFyContent: "space-around",
@@ -10,7 +9,7 @@ const STYLE = {
 };
 
 export function Register() {
-  const [cuenta, setCuenta] = useContext(AccountContext);
+  const [cuentas, setCuentas] = useContext(AllAccountsContext);
 
   return (
     <>
@@ -22,7 +21,7 @@ export function Register() {
         }}
       >
         <div style={{ marginRight: "auto", marginLeft: "auto" }}>
-          <Formulario setCuenta={setCuenta} cuenta={cuenta} />
+          <Formulario cuentas={cuentas} setCuentas={setCuentas} />
         </div>
         <div style={{ margin: "auto" }}>
           <CardPublicidad />

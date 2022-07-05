@@ -20,7 +20,13 @@ export function AccountCreated() {
         </Typography>
       </div>
       <div style={{ marginTop: "5vw" }}>
-        <Button>Ir a mi cuenta</Button>
+        <Button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Ir a mi cuenta
+        </Button>
         <Button
           onClick={() => {
             navigate("/register");

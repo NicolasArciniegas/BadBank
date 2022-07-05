@@ -19,7 +19,7 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-export function Formulario({ setCuenta, cuenta }) {
+export function Formulario({ cuentas, setCuentas }) {
   const [disabled, setDisabled] = useState(true);
   const [values, setValues] = useState({
     nombre: "",
@@ -50,7 +50,7 @@ export function Formulario({ setCuenta, cuenta }) {
   };
 
   const handleCreateAccount = (e) => {
-    setCuenta({ action: "set", values });
+    setCuentas({ action: "set", values });
     navigate("/register/accountCreated");
   };
 

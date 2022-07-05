@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { AccountContext } from "../../AccountContext";
+import { LoggedUserContext } from "../../LoggedUserContext";
 import { Formulario } from "../comun/Formulario";
 import { Balance } from "../../display/Balance";
 import { Movimientos } from "../../display/Movimientos";
 
 export function Retirar() {
-  const [cuenta, setCuenta] = useContext(AccountContext);
+  const [cuenta, setCuenta] = useContext(LoggedUserContext);
   return (
     <div style={{ display: "flex", marginTop: "2vw" }}>
       <div style={{ marginRight: "auto", marginLeft: "auto" }}>
