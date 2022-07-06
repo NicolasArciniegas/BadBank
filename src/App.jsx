@@ -11,28 +11,16 @@ DATA TYPES
     nombre: str, apellido: str, email: str, password: str, cuenta: str (ahorros, corriente),
     numCuenta: str, movimientos: [], bolsillos: [], balance: number
   }
--> Bolsillos:
+-> Bolsillos list:
   {
-    nombre: str, valor: int
+    nombre: str, balance: int
   }
--> Movimientos
+-> Movimientos list
   {
     fecha: str, movimiento: str (deposit, withdraw),
     valor: int
   }
 /*/
-
-async function RANDOM_ACCOUNT(accounts) {
-  const existingAccounts = accounts.map((item) => item.numCuenta);
-  let randomAccount = parseInt(Math.random() * 1000000);
-  const findNumber = async () => {
-    while (existingAccounts.includes(randomAccount)) {
-      randomAccount = parseInt(Math.random() * 1000000);
-    }
-  };
-  await findNumber();
-  return randomAccount;
-}
 
 function ReducerAccounts(state, payload) {
   const ACCOUNT_MODEL = {
@@ -48,13 +36,12 @@ function ReducerAccounts(state, payload) {
   };
   switch (payload.action) {
     case "set":
-      const accountNumber = 1;
       return [
         ...state,
         {
           ...ACCOUNT_MODEL,
           ...payload.values,
-          numCuenta: accountNumber,
+          numCuenta: state.length,
         },
       ];
     case "deposit":

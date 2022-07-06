@@ -32,8 +32,8 @@ export function NavBar() {
                 <NavDropdown.Item>
                   <Link to="/retirar">Retirar</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Transferir
+                <NavDropdown.Item>
+                  <Link to="/transferir">Transferir</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
                   <Link to="/abonar">Abonar</Link>
