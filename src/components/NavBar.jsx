@@ -1,8 +1,10 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function NavBar() {
+  const location = useLocation();
   return (
     <>
       <Navbar bg="primary" variant="dark">
@@ -15,12 +17,17 @@ export function NavBar() {
                 <Link
                   style={{
                     textDecoration: "none",
-                    color: "rgb(153, 182, 250)",
+                    color:
+                      location.pathname === "/"
+                        ? "white"
+                        : "rgb(153, 182, 250)",
                   }}
                   onMouseOver={(e) => (e.target.style.color = "white")}
-                  onMouseOut={(e) =>
-                    (e.target.style.color = "rgb(153, 182, 250)")
-                  }
+                  onMouseOut={(e) => {
+                    location.pathname === "/"
+                      ? (e.target.style.color = "white")
+                      : (e.target.style.color = "rgb(153, 182, 250)");
+                  }}
                   to="/"
                 >
                   Home
@@ -31,12 +38,17 @@ export function NavBar() {
                   to="/allData"
                   style={{
                     textDecoration: "none",
-                    color: "rgb(153, 182, 250)",
+                    color:
+                      location.pathname === "/allData"
+                        ? "white"
+                        : "rgb(153, 182, 250)",
                   }}
                   onMouseOver={(e) => (e.target.style.color = "white")}
-                  onMouseOut={(e) =>
-                    (e.target.style.color = "rgb(153, 182, 250)")
-                  }
+                  onMouseOut={(e) => {
+                    location.pathname === "/allData"
+                      ? (e.target.style.color = "white")
+                      : (e.target.style.color = "rgb(153, 182, 250)");
+                  }}
                 >
                   All data
                 </Link>
@@ -45,12 +57,17 @@ export function NavBar() {
                 <Link
                   style={{
                     textDecoration: "none",
-                    color: "rgb(153, 182, 250)",
+                    color:
+                      location.pathname === "/login"
+                        ? "white"
+                        : "rgb(153, 182, 250)",
                   }}
                   onMouseOver={(e) => (e.target.style.color = "white")}
-                  onMouseOut={(e) =>
-                    (e.target.style.color = "rgb(153, 182, 250)")
-                  }
+                  onMouseOut={(e) => {
+                    location.pathname === "/login"
+                      ? (e.target.style.color = "white")
+                      : (e.target.style.color = "rgb(153, 182, 250)");
+                  }}
                   to="/login"
                 >
                   Login
@@ -60,13 +77,18 @@ export function NavBar() {
                 <Link
                   style={{
                     textDecoration: "none",
-                    color: "rgb(153, 182, 250)",
+                    color:
+                      location.pathname === "/register"
+                        ? "white"
+                        : "rgb(153, 182, 250)",
                   }}
                   to="/register"
                   onMouseOver={(e) => (e.target.style.color = "white")}
-                  onMouseOut={(e) =>
-                    (e.target.style.color = "rgb(153, 182, 250)")
-                  }
+                  onMouseOut={(e) => {
+                    location.pathname === "/register"
+                      ? (e.target.style.color = "white")
+                      : (e.target.style.color = "rgb(153, 182, 250)");
+                  }}
                 >
                   Create Account
                 </Link>
