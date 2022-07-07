@@ -40,6 +40,7 @@ export function Formulario({
         valor: parseInt(values.valor),
       });
       setValues({ ...values, valor: 0 });
+      alert("Operacion exitosa");
     }
   };
 
