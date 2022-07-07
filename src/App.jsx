@@ -22,6 +22,42 @@ DATA TYPES
   }
 /*/
 
+const TESTACCOUNTS = [
+  {
+    nombre: "Nicolas",
+    apellido: "Arciniegas",
+    email: "nicolas.arciniegas@outlook.com",
+    password: "Nico1234.",
+    cuenta: "ahorros",
+    numCuenta: "123456",
+    movimientos: [],
+    bolsillos: [{ nombre: "Principal", balance: 0 }],
+    balance: 0,
+  },
+  {
+    nombre: "Oscar",
+    apellido: "Arciniegas",
+    email: "oscar@outlook.com",
+    password: "Oscar1234.",
+    cuenta: "ahorros",
+    numCuenta: "123457",
+    movimientos: [],
+    bolsillos: [{ nombre: "Principal", balance: 0 }],
+    balance: 0,
+  },
+  {
+    nombre: "Felipe",
+    apellido: "Arciniegas",
+    email: "felipe@outlook.com",
+    password: "Felipe1234.",
+    cuenta: "ahorros",
+    numCuenta: "123458",
+    movimientos: [],
+    bolsillos: [{ nombre: "Principal", balance: 0 }],
+    balance: 0,
+  },
+];
+
 function ReducerAccounts(state, payload) {
   const ACCOUNT_MODEL = {
     nombre: "",
@@ -36,12 +72,15 @@ function ReducerAccounts(state, payload) {
   };
   switch (payload.action) {
     case "set":
+      const randomAccount = `${state.length}${Math.floor(
+        Math.random() * 1000000
+      )}`;
       return [
         ...state,
         {
           ...ACCOUNT_MODEL,
           ...payload.values,
-          numCuenta: state.length,
+          numCuenta: randomAccount,
         },
       ];
     case "deposit":
@@ -76,6 +115,96 @@ function ReducerAccounts(state, payload) {
         ...state.filter((account) => account.email !== payload.account.email),
         { ...payload.account },
       ];
+    case "transfer":
+      const cuentaUsuario = {
+        ...payload.user,
+        movimientos: [
+          ...payload.user.movimientos,
+          ...payload.transf.map((trans) => {
+            return {
+              bolsillo: trans.bolsillo,
+              valor: trans.valor,
+              movimiento: "outgoingTransfer",
+              fecha: new Date().toString().slice(0, 10),
+              to: trans.cuenta,
+            };
+          }),
+        ],
+        bolsillos: [
+          ...payload.user.bolsillos.filter(
+            (b) =>
+              !payload.transf.map((item) => item.bolsillo).includes(b.nombre)
+          ),
+          ...payload.user.bolsillos
+            .filter((b) =>
+              payload.transf.map((item) => item.bolsillo).includes(b.nombre)
+            )
+            .map((bols) => {
+              return {
+                ...bols,
+                balance:
+                  bols.balance -
+                  payload.transf
+                    .filter((t) => t.bolsillo === bols.nombre)
+                    .reduce((partiaValue, i) => partiaValue + i.valor, 0),
+              };
+            }),
+        ],
+        balance:
+          payload.user.balance -
+          payload.transf.reduce((partialValue, i) => partialValue + i.valor, 0),
+      };
+      const cuentasAfectadas = [
+        ...new Set(payload.transf.map((transf) => transf.cuenta)),
+      ];
+      const cuentasActualizadas = [
+        ...state.filter(
+          (c) =>
+            !cuentasAfectadas.includes(c.numCuenta) &&
+            c.numCuenta != payload.user.numCuenta
+        ),
+        ...cuentasAfectadas.map((codigoCuenta) => {
+          const cuenta = state.find((it) => it.numCuenta === codigoCuenta);
+          const movimientosCuenta = [
+            ...cuenta.movimientos,
+            ...payload.transf
+              .filter((t) => t.cuenta === cuenta.numCuenta)
+              .map((mov) => {
+                return {
+                  fecha: new Date().toString().slice(0, 10),
+                  movimiento: "incomingTransfer",
+                  valor: mov.valor,
+                  bolsillo: "Principal",
+                  from: payload.user.numCuenta,
+                };
+              }),
+          ];
+          const totalTransferido = payload.transf
+            .filter((tf) => tf.cuenta === cuenta.numCuenta)
+            .reduce((partialValue, i) => (partialValue += i.valor), 0);
+          const bolsillos = [
+            ...cuenta.bolsillos.filter((b) => b.nombre != "Principal"),
+            {
+              nombre: "Principal",
+              balance:
+                cuenta.bolsillos.find((bN) => bN.nombre == "Principal")
+                  .balance + totalTransferido,
+            },
+          ];
+          const balance = bolsillos.reduce(
+            (partialValue, i) => (partialValue += i.balance),
+            0
+          );
+          return {
+            ...cuenta,
+            movimientos: movimientosCuenta,
+            bolsillos,
+            balance,
+          };
+        }),
+        cuentaUsuario,
+      ];
+      return [...cuentasActualizadas];
     default:
       return state;
   }
@@ -118,7 +247,9 @@ function ReducerUser(state, payload) {
 }
 
 export function App() {
-  const [cuentas, dispatchAccounts] = useReducer(ReducerAccounts, []);
+  const [cuentas, dispatchAccounts] = useReducer(ReducerAccounts, [
+    ...TESTACCOUNTS,
+  ]);
   const [user, setUser] = useReducer(ReducerUser, {});
 
   useEffect(() => {

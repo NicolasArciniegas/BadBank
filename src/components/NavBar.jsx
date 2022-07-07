@@ -23,6 +23,14 @@ export function NavBar() {
               <Nav.Link>
                 <Link
                   style={{ textDecoration: "none", color: "white" }}
+                  to="/login"
+                >
+                  Login
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
                   to="/register"
                 >
                   Create Account

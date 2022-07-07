@@ -217,7 +217,10 @@ export function Formulario({ dispatch, cuentas, setCuentas, user, transf }) {
           </Button>
         </FormControl>
         <FormControl>
-          <Button disabled={false} onClick={() => transferencia()}>
+          <Button
+            disabled={false}
+            onClick={() => setCuentas({ action: "transfer", transf, user })}
+          >
             Transferir
           </Button>
         </FormControl>
