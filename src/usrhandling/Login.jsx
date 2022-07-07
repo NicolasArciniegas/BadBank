@@ -48,7 +48,7 @@ export function Login() {
       if (account.email === user) {
         if (account.password === password) {
           setUser({ action: "set", account: { ...account } });
-          navigate("/");
+          navigate("/home");
         } else {
           setErrores({ password: "Contraseña incorrecta" });
         }

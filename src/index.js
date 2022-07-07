@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { App } from "./App";
 
 // Paginas
+import { Home } from "./home/Home";
 import { Register } from "./register/Register";
 import { Login } from "./usrhandling/Login";
 import { Abonar } from "./operations/abonar/Abonar";
@@ -22,6 +23,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
+        <Route path="/home" element={<Home />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register/accountCreated" element={<AccountCreated />} />

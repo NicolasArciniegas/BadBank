@@ -18,17 +18,17 @@ export function NavBar() {
                   style={{
                     textDecoration: "none",
                     color:
-                      location.pathname === "/"
+                      location.pathname === "/home"
                         ? "white"
                         : "rgb(153, 182, 250)",
                   }}
                   onMouseOver={(e) => (e.target.style.color = "white")}
                   onMouseOut={(e) => {
-                    location.pathname === "/"
+                    location.pathname === "/home"
                       ? (e.target.style.color = "white")
                       : (e.target.style.color = "rgb(153, 182, 250)");
                   }}
-                  to="/"
+                  to="/home"
                 >
                   Home
                 </Link>
