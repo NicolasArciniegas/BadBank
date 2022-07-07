@@ -2,8 +2,8 @@ import React, { useReducer, useContext } from "react";
 import { AllAccountsContext } from "../../AllAccountsContext";
 import { LoggedUserContext } from "../../LoggedUserContext";
 import { Formulario } from "./Formulario";
-import { TablaTransferencia } from "./TablaTransferencia";
 import { Transferencia } from "./Transferencia";
+import { GoToLogin } from "../comun/GoToLogin";
 /*/
 --- ITEMS TRANSFERENCIA ---
 {
@@ -29,22 +29,29 @@ export function Transferir() {
   const [values, dispatch] = useReducer(Reducer, []);
   const [cuentas, setCuentas] = useContext(AllAccountsContext);
   const [user, setUser] = useContext(LoggedUserContext);
-  return (
-    <>
-      <div style={{ display: "flex", marginTop: "5vw" }}>
-        <div style={{ marginLeft: "auto", marginRight: "auto" }}>
-          <Formulario
-            dispatch={dispatch}
-            cuentas={cuentas}
-            setCuentas={setCuentas}
-            user={user}
-            transf={values}
-          />
+  if (Object.keys(user).length > 0) {
+    return (
+      <>
+        <div style={{ display: "flex", marginTop: "5vw" }}>
+          <div style={{ marginLeft: "auto", marginRight: "auto" }}>
+            <Formulario
+              dispatch={dispatch}
+              cuentas={cuentas}
+              setCuentas={setCuentas}
+              user={user}
+              transf={values}
+            />
+          </div>
+          <div style={{ margin: "auto" }}>
+            <Transferencia
+              values={values}
+              mensaje="Items de tu transferencia"
+            />
+          </div>
         </div>
-        <div style={{ margin: "auto" }}>
-          <Transferencia values={values} mensaje="Items de tu transferencia" />
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else {
+    return <GoToLogin />;
+  }
 }
