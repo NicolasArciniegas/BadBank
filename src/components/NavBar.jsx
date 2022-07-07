@@ -11,18 +11,46 @@ export function NavBar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link>
                 <Link
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "rgb(153, 182, 250)",
+                  }}
+                  onMouseOver={(e) => (e.target.style.color = "white")}
+                  onMouseOut={(e) =>
+                    (e.target.style.color = "rgb(153, 182, 250)")
+                  }
+                  to="/"
+                >
+                  Home
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link
                   to="/allData"
+                  style={{
+                    textDecoration: "none",
+                    color: "rgb(153, 182, 250)",
+                  }}
+                  onMouseOver={(e) => (e.target.style.color = "white")}
+                  onMouseOut={(e) =>
+                    (e.target.style.color = "rgb(153, 182, 250)")
+                  }
                 >
                   All data
                 </Link>
               </Nav.Link>
               <Nav.Link>
                 <Link
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "rgb(153, 182, 250)",
+                  }}
+                  onMouseOver={(e) => (e.target.style.color = "white")}
+                  onMouseOut={(e) =>
+                    (e.target.style.color = "rgb(153, 182, 250)")
+                  }
                   to="/login"
                 >
                   Login
@@ -30,8 +58,15 @@ export function NavBar() {
               </Nav.Link>
               <Nav.Link>
                 <Link
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "rgb(153, 182, 250)",
+                  }}
                   to="/register"
+                  onMouseOver={(e) => (e.target.style.color = "white")}
+                  onMouseOut={(e) =>
+                    (e.target.style.color = "rgb(153, 182, 250)")
+                  }
                 >
                   Create Account
                 </Link>
