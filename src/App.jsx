@@ -22,42 +22,6 @@ DATA TYPES
   }
 /*/
 
-const TESTACCOUNTS = [
-  {
-    nombre: "Nicolas",
-    apellido: "Arciniegas",
-    email: "nicolas.arciniegas@outlook.com",
-    password: "Nico1234.",
-    cuenta: "ahorros",
-    numCuenta: "123456",
-    movimientos: [],
-    bolsillos: [{ nombre: "Principal", balance: 0 }],
-    balance: 0,
-  },
-  {
-    nombre: "Oscar",
-    apellido: "Arciniegas",
-    email: "oscar@outlook.com",
-    password: "Oscar1234.",
-    cuenta: "ahorros",
-    numCuenta: "123457",
-    movimientos: [],
-    bolsillos: [{ nombre: "Principal", balance: 0 }],
-    balance: 0,
-  },
-  {
-    nombre: "Felipe",
-    apellido: "Arciniegas",
-    email: "felipe@outlook.com",
-    password: "Felipe1234.",
-    cuenta: "ahorros",
-    numCuenta: "123458",
-    movimientos: [],
-    bolsillos: [{ nombre: "Principal", balance: 0 }],
-    balance: 0,
-  },
-];
-
 function ReducerAccounts(state, payload) {
   const ACCOUNT_MODEL = {
     nombre: "",
@@ -247,9 +211,7 @@ function ReducerUser(state, payload) {
 }
 
 export function App() {
-  const [cuentas, dispatchAccounts] = useReducer(ReducerAccounts, [
-    ...TESTACCOUNTS,
-  ]);
+  const [cuentas, dispatchAccounts] = useReducer(ReducerAccounts, []);
   const [user, setUser] = useReducer(ReducerUser, {});
 
   useEffect(() => {
